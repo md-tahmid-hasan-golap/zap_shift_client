@@ -6,7 +6,7 @@ import { Carousel } from "react-responsive-carousel";
 
 const Banner = () => {
   return (
-    <div className="banner-container">
+    <div className="banner-container mt-7">
       <Carousel
         autoPlay
         infiniteLoop
