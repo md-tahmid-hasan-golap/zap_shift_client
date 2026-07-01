@@ -14,7 +14,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-base-100 shadow-sm px-4 md:px-8 py-3">
+    <div className="navbar sticky top-0 z-50 bg-base-100/90 backdrop-blur-md shadow-sm px-4 md:px-8 py-3">
       {/* Logo Section */}
       <div className="navbar-start">
         <div className="dropdown">

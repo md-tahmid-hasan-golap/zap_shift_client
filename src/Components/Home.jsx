@@ -6,6 +6,7 @@ import Faq from "./Faq";
 import HowItWork from "./HowItWork";
 import LiveParcel from "./LiveParcel";
 import OurServices from "./OurServices";
+const reviewsPromised = fetch("/reviews.json").then((res) => res.json());
 
 const Home = () => {
   return (
@@ -16,7 +17,7 @@ const Home = () => {
       <BrandNew />
       <LiveParcel />
       <Customar />
-      <CustomarReviews />
+      <CustomarReviews reviewsPromised={reviewsPromised} />
       <Faq />
     </div>
   );
