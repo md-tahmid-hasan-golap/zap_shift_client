@@ -5,16 +5,34 @@ const Navbar = () => {
   const links = (
     <>
       <li>
-        <NavLink to="/services">Services</NavLink>
+        <NavLink
+          to="/services"
+          className={({ isActive }) =>
+            isActive
+              ? "font-semibold text-[#D4F866] bg-black underline underline-offset-4"
+              : ""
+          }
+        >
+          Services
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/coverage">Coverage</NavLink>
+        <NavLink
+          to="/coverage"
+          className={({ isActive }) =>
+            isActive
+              ? "font-semibold text-[#D4F866] bg-black underline underline-offset-4"
+              : ""
+          }
+        >
+          Coverage
+        </NavLink>
       </li>
     </>
   );
 
   return (
-    <div className="navbar sticky top-0 z-50 bg-base-100/90 backdrop-blur-md shadow-sm px-4 md:px-8 py-3">
+    <div className="navbar sticky top-0 z-[1001] bg-base-100/90 backdrop-blur-md shadow-sm px-4 md:px-8 py-3">
       {/* Logo Section */}
       <div className="navbar-start">
         <div className="dropdown">

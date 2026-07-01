@@ -12,6 +12,6 @@ export default defineConfig({
   },
   optimizeDeps: {
     force: true,
-    include: ['react-icons/fa', 'react-icons/fi', 'swiper', 'swiper/react', 'swiper/modules'],
+    include: ['react-icons/fa', 'react-icons/fi', 'swiper', 'swiper/react', 'swiper/modules', 'leaflet', 'react-leaflet'],
   },
 })
