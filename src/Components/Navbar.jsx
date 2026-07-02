@@ -1,7 +1,30 @@
 import { Link, NavLink } from "react-router";
 import logo from "../../src/assets/banner/logo.png";
+import { useContext } from "react";
+import Swal from "sweetalert2";
+import { AuthContext } from "../firebase/FirebaseAuthProvider";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogout = async () => {
+    try {
+      await logOut();
+      Swal.fire({
+        icon: "success",
+        title: "Logged out",
+        text: "You have been signed out successfully.",
+        timer: 1800,
+        showConfirmButton: false,
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Logout failed",
+        text: error.message || "Something went wrong while logging out.",
+      });
+    }
+  };
   const links = (
     <>
       <li>
@@ -28,6 +51,20 @@ const Navbar = () => {
           Coverage
         </NavLink>
       </li>
+      {user && (
+        <li>
+          <NavLink
+            to="/send-a-parcel"
+            className={({ isActive }) =>
+              isActive
+                ? "font-semibold text-[#D4F866] bg-black underline underline-offset-4"
+                : ""
+            }
+          >
+            Send A Parcel
+          </NavLink>
+        </li>
+      )}
     </>
   );
 
@@ -75,34 +112,53 @@ const Navbar = () => {
 
       {/* Buttons */}
       <div className="navbar-end gap-3">
-        <Link
-          to="/signin"
-          className="btn btn-ghost border border-gray-200 rounded-xl px-5 font-semibold"
-        >
-          Sign In
-        </Link>
-        <Link
-          to="/signup"
-          className="btn bg-[#D4F866] hover:bg-[#C2E45d] text-black border-none rounded-xl px-6 font-bold flex items-center gap-2"
-        >
-          Sign Up
-          <span className="bg-[#1A201C] text-white rounded-full p-1.5 flex items-center justify-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+        {user ? (
+          <>
+            <button
+              onClick={handleLogout}
+              className="btn  bg-red-500 text-white border-none rounded-xl px-6 font-bold"
             >
-              <line x1="7" y1="17" x2="17" y2="7"></line>
-              <polyline points="7 7 17 7 17 17"></polyline>
-            </svg>
-          </span>
-        </Link>
+              Logout
+            </button>
+            <Link
+              to="/rider"
+              className="btn bg-[#D4F866] hover:bg-[#C2E45d] text-black border-none rounded-xl px-6 font-bold"
+            >
+              Be a Rider
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link
+              to="/signin"
+              className="btn btn-ghost border border-gray-200 rounded-xl px-5 font-semibold"
+            >
+              Sign In
+            </Link>
+            <Link
+              to="/signup"
+              className="btn bg-[#D4F866] hover:bg-[#C2E45d] text-black border-none rounded-xl px-6 font-bold flex items-center gap-2"
+            >
+              Sign Up
+              <span className="bg-[#1A201C] text-white rounded-full p-1.5 flex items-center justify-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </span>
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );
