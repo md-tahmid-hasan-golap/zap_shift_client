@@ -1,6 +1,14 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../firebase/FirebaseAuthProvider";
+import UseAxiosSecure from "./UseAxiosSecure";
+import { useLoaderData } from "react-router";
 
 const SendAParcel = () => {
+  const { user } = useContext(AuthContext);
+  const serviceCenters = useLoaderData();
+  console.log("Service Centers:", serviceCenters);
+  const axiosSecure = UseAxiosSecure();
   const {
     register,
     handleSubmit,
@@ -8,7 +16,7 @@ const SendAParcel = () => {
   } = useForm();
 
   const handelSendParcel = (data) => {
-    console.log(data);
+    console.log("Form Data:", data);
   };
 
   return (
@@ -99,8 +107,30 @@ const SendAParcel = () => {
                 <input
                   className="input input-bordered w-full"
                   placeholder="Sender Name"
+                  defaultValue={user?.displayName}
                   {...register("senderName", { required: true })}
                 />
+              </div>
+
+              <div>
+                <label className="font-medium block mb-1">Sender Email</label>
+                <input
+                  className="input input-bordered w-full"
+                  placeholder="Sender Email"
+                  defaultValue={user?.email}
+                  {...register("senderEmail", { required: true })}
+                />
+              </div>
+              <div>
+                <label className="font-medium block mb-1">
+                  Sender District
+                </label>
+                <select
+                  className="select select-bordered w-full"
+                  {...register("senderDistrict")}
+                >
+                  <option>Select District</option>
+                </select>
               </div>
               <div>
                 <label className="font-medium block mb-1">Sender Address</label>
@@ -118,15 +148,6 @@ const SendAParcel = () => {
                   {...register("senderContact")}
                 />
               </div>
-              <div>
-                <label className="font-medium block mb-1">District</label>
-                <select
-                  className="select select-bordered w-full"
-                  {...register("senderDistrict")}
-                >
-                  <option>Select District</option>
-                </select>
-              </div>
             </div>
           </div>
 
@@ -141,6 +162,25 @@ const SendAParcel = () => {
                   placeholder="Receiver Name"
                   {...register("receiverName", { required: true })}
                 />
+              </div>
+              <div>
+                <label className="font-medium block mb-1">Receiver Email</label>
+                <input
+                  className="input input-bordered w-full"
+                  placeholder="Receiver Email"
+                  {...register("receiverEmail", { required: true })}
+                />
+              </div>
+              <div>
+                <label className="font-medium block mb-1">
+                  Receiver District
+                </label>
+                <select
+                  className="select select-bordered w-full"
+                  {...register("receiverDistrict")}
+                >
+                  <option>Select District</option>
+                </select>
               </div>
               <div>
                 <label className="font-medium block mb-1">
@@ -159,15 +199,6 @@ const SendAParcel = () => {
                   placeholder="Contact Number"
                   {...register("receiverContact")}
                 />
-              </div>
-              <div>
-                <label className="font-medium block mb-1">District</label>
-                <select
-                  className="select select-bordered w-full"
-                  {...register("receiverDistrict")}
-                >
-                  <option>Select District</option>
-                </select>
               </div>
             </div>
           </div>

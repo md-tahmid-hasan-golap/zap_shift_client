@@ -24,6 +24,7 @@ const router = createBrowserRouter([
       {
         path: "/send-a-parcel",
         element: <SendAParcel />,
+        loader: () => fetch("/serviceCenters.json"),
       },
     ],
   },
