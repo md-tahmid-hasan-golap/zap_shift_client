@@ -8,7 +8,7 @@ const SendAParcel = () => {
   const { user } = useContext(AuthContext);
   const serviceCenters = useLoaderData();
   console.log("Service Centers:", serviceCenters);
-  const axiosSecure = UseAxiosSecure();
+  // const axiosSecure = UseAxiosSecure();
   const {
     register,
     handleSubmit,
