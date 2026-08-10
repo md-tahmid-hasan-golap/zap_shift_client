@@ -5,7 +5,7 @@ import OurServices from "./OurServices";
 const Home = () => {
   return (
     <div>
-      <Banner />
+      {/* <Banner /> */}
       <HowItWork />
       <OurServices />
     </div>
