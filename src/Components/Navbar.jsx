@@ -1,14 +1,42 @@
+import { useContext } from "react";
 import Logo from "./Logo";
 import { NavLink, Link } from "react-router-dom";
+import { AuthContext } from "../firebase/FirebaseAuthProvider";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+  const { user, logOutUser } = useContext(AuthContext);
+
+  const handelLogout = () => {
+    logOutUser()
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Logged Out!",
+          text: "You have been successfully logged out.",
+          confirmButtonColor: "#03373D",
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+
+        Swal.fire({
+          icon: "error",
+          title: "Logout Failed!",
+          text: err.message,
+          confirmButtonColor: "#03373D",
+        });
+      });
+  };
+
   const links = (
     <>
       <NavLink to="/coverage">Coverage</NavLink>
     </>
   );
+
   return (
-    <div className="navbar bg-base-100 shadow-sm  sticky top-0 z-50">
+    <div className="navbar bg-base-100 shadow-sm sticky top-0 z-50">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -28,6 +56,7 @@ const Navbar = () => {
               />{" "}
             </svg>
           </div>
+
           <ul
             tabIndex="-1"
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
@@ -35,17 +64,33 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
+
         <a className="btn btn-ghost text-xl">
           <Logo />
         </a>
       </div>
+
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
+
       <div className="navbar-end">
-        <Link to="/signin" className="btn">
-          Sign In
-        </Link>
+        {user ? (
+          <div className="navbar-end">
+            <button
+              onClick={handelLogout}
+              className="btn bg-red-500 text-white font-bold"
+            >
+              Logout
+            </button>
+          </div>
+        ) : (
+          <div className="navbar-end">
+            <Link to="/signin" className="btn">
+              Sign In
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
