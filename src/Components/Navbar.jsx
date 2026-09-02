@@ -31,7 +31,26 @@ const Navbar = () => {
 
   const links = (
     <>
-      <NavLink to="/coverage">Coverage</NavLink>
+      <li className="mr-1">
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-lime-400 font-bold bg-black btn" : ""
+          }
+          to="/coverage"
+        >
+          Coverage
+        </NavLink>
+      </li>
+      <li className="mr-1">
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-lime-400 font-bold bg-black btn" : ""
+          }
+          to="/sendAParcel"
+        >
+          Send a Parcel
+        </NavLink>
+      </li>
     </>
   );
 
