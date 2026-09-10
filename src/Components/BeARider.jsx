@@ -7,3 +7,5 @@ const BeARider = () => {
 };
 
 export default BeARider;
+///
+Covarage;
