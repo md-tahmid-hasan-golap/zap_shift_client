@@ -1,10 +1,9 @@
-// const BeARider = () => {
-//   return (
-//     <div>
-//       <h2>This is Rider</h2>
-//     </div>
-//   );
-// };
+const BeARider = () => {
+  return (
+    <div>
+      <h2>This is Rider</h2>
+    </div>
+  );
+};
 
-// export default BeARider;
-
+export default BeARider;
